@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <windows.h>
+#include <omp.h>
 
 #define MAX_ITER 1000    // Maximum iterations
 #define TOLERANCE 1e-5   // Convergence tolerance
@@ -23,6 +24,7 @@ void jacobi(int N, double **A, double *b, double *x, int *iterations) {
         }
 
         // Compute new solution
+        #pragma omp parallel for
         for(int i = 0; i < N; i++) {
             double sum = 0.0;
             for(int j = 0; j < N; j++) {
